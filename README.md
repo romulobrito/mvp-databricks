@@ -1,48 +1,48 @@
-# MVP - Analise de Conformidade de Ciclos de Atendimento
+# MVP - Análise de Conformidade de Ciclos de Atendimento
 
-Este repositorio contem o MVP (Minimum Viable Product) desenvolvido para a disciplina de Engenharia de Dados, focado na analise de conformidade de ciclos de atendimento rodoviario utilizando Databricks.
+Este repositório contém o MVP (Minimum Viable Product) desenvolvido para a disciplina de Engenharia de Dados, focado na análise de conformidade de ciclos de atendimento rodoviário utilizando Databricks.
 
-## Estrutura do Repositorio
+## Estrutura do Repositório
 
 ### Notebooks Jupyter (`.ipynb`)
 
-O pipeline ETL e as analises estao organizados em notebooks sequenciais:
+O pipeline ETL e as análises estão organizados em notebooks sequenciais:
 
-- **`00_gerar_bronze_ciclos_concatenados.ipynb`** - Camada Bronze: Carrega e concatena os dados brutos dos arquivos Excel (Ciclo01.xlsx e Ciclo02.xlsx) em um unico arquivo Parquet.
+- **`00_gerar_bronze_ciclos_concatenados.ipynb`** - Camada Bronze: Carrega e concatena os dados brutos dos arquivos Excel (Ciclo01.xlsx e Ciclo02.xlsx) em um único arquivo Parquet.
 
-- **`01_analise_qualidade_dados.ipynb`** - Analise de Qualidade: Realiza analise exploratoria da qualidade dos dados nas camadas Bronze, Silver Base e Silver Referencia, identificando problemas e propondo solucoes.
+- **`01_analise_qualidade_dados.ipynb`** - Análise de Qualidade: Realiza análise exploratória da qualidade dos dados nas camadas Bronze, Silver Base e Silver Referência, identificando problemas e propondo soluções.
 
-- **`02_gerar_silver_ciclos_base.ipynb`** - Camada Silver Base: Aplica transformacoes basicas nos dados Bronze, incluindo conversao de tipos, tratamento de valores nulos e criacao de campos calculados.
+- **`02_gerar_silver_ciclos_base.ipynb`** - Camada Silver Base: Aplica transformações básicas nos dados Bronze, incluindo conversão de tipos de dados, tratamento de valores nulos, padronização de formatos de data/hora, criação de campos calculados (como minutos desde o início do dia e identificação de ciclos), e aplicação de filtros iniciais para garantir a qualidade dos dados antes das próximas etapas do pipeline.
 
-- **`03_gerar_silver_ciclos_referencia.ipynb`** - Camada Silver Referencia: Seleciona os registros de referencia para cada dia e ciclo, utilizando a logica do racional antigo (selecao do registro mais proximo do fim do ciclo de 180 minutos).
+- **`03_gerar_silver_ciclos_referencia.ipynb`** - Camada Silver Referência: Seleciona os registros de referência para cada dia e ciclo, utilizando a lógica do racional antigo. Para cada combinação de Data e Ciclo, identifica o registro mais próximo do fim ideal do ciclo (180 minutos), priorizando registros antes ou no limite do ciclo. Este processo garante que apenas um registro representativo seja mantido por dia e ciclo, preparando os dados para o cálculo de conformidade na camada Gold.
 
-- **`04_gerar_gold_conformidade_racional.ipynb`** - Camada Gold: Calcula a conformidade por ciclo e por periodo, gerando as tabelas finais de analise conforme o racional estabelecido.
+- **`04_gerar_gold_conformidade_racional.ipynb`** - Camada Gold: Calcula a conformidade por ciclo e por período, gerando as tabelas finais de análise conforme o racional estabelecido.
 
-- **`04_gerar_painel_consolidado_mvp.ipynb`** - Painel Consolidado: Gera o painel Excel final com analise multi-KM, apresentando medias, saldos e status de atendimento.
+- **`04_gerar_painel_consolidado_mvp.ipynb`** - Painel Consolidado: Gera o painel Excel final com análise multi-KM, apresentando médias, saldos e status de atendimento.
 
-- **`05_analise_solucao_problema.ipynb`** - Analise de Solucao: Responde perguntas de negocio, gera visualizacoes e discute os resultados obtidos.
+- **`05_analise_solucao_problema.ipynb`** - Análise de Solução: Responde perguntas de negócio, gera visualizações e discute os resultados obtidos.
 
-### Documentacao
+### Documentação
 
-- **`README_MVP.md`** - Documentacao detalhada do MVP, incluindo requisitos, arquitetura e instrucoes de uso.
+- **`README_MVP.md`** - Documentação detalhada do MVP, incluindo requisitos, arquitetura e instruções de uso.
 
-- **`PROBLEMA_E_METODOLOGIA.md`** - Descricao do problema de negocio, metodologia de solucao e racional tecnico.
+- **`PROBLEMA_E_METODOLOGIA.md`** - Descrição do problema de negócio, metodologia de solução e racional técnico.
 
-- **`CATALOGO_DADOS.md`** - Catalogo completo dos dados, incluindo descricao de atributos, dominios e linhagem de dados.
+- **`CATALOGO_DADOS.md`** - Catálogo completo dos dados, incluindo descrição de atributos, domínios e linhagem de dados.
 
-- **`PIPELINE_MVP.md`** - Documentacao detalhada do pipeline ETL, incluindo transformacoes em cada camada (Bronze, Silver, Gold).
+- **`PIPELINE_MVP.md`** - Documentação detalhada do pipeline ETL, incluindo transformações em cada camada (Bronze, Silver, Gold).
 
-- **`AUTOAVALIACAO.md`** - Autoavaliacao do trabalho realizado, destacando pontos fortes, desafios e aprendizados.
+- **`AUTOAVALIACAO.md`** - Autoavaliação do trabalho realizado, destacando pontos fortes, desafios e aprendizados.
 
-### Evidencias do Databricks
+### Evidências do Databricks
 
-A pasta **`evidencias-databricks/`** contem os arquivos HTML exportados da execucao dos notebooks no ambiente Databricks. Estes arquivos contem:
+A pasta **`evidencias-databricks/`** contém os arquivos HTML exportados da execução dos notebooks no ambiente Databricks. Estes arquivos contêm:
 
-- **Codigo executado**: Todas as celulas dos notebooks com seus codigos Python
-- **Resultados**: Outputs das execucoes, incluindo tabelas, graficos e mensagens de log
-- **Metadados**: Informacoes sobre tempo de execucao, recursos utilizados e status de cada celula
+- **Código executado**: Todas as células dos notebooks com seus códigos Python
+- **Resultados**: Outputs das execuções, incluindo tabelas, gráficos e mensagens de log
+- **Metadados**: Informações sobre tempo de execução, recursos utilizados e status de cada célula
 
-**Importante**: Os arquivos HTML precisam ser baixados do repositorio para serem visualizados corretamente, pois contem JavaScript e dados embutidos que requerem acesso local ao arquivo.
+**Importante**: Os arquivos HTML precisam ser baixados do repositório para serem visualizados corretamente, pois contêm JavaScript e dados embutidos que requerem acesso local ao arquivo.
 
 ## Como os Componentes se Relacionam com o MVP
 
@@ -54,62 +54,62 @@ Os notebooks implementam um pipeline ETL completo seguindo a arquitetura Data La
 - **Silver**: Dados limpos e transformados em duas etapas (Base e Referencia)
 - **Gold**: Dados agregados e prontos para analise de negocio
 
-### 2. Analise de Qualidade de Dados
+### 2. Análise de Qualidade de Dados
 
 O notebook `01_analise_qualidade_dados.ipynb` atende aos requisitos da disciplina de:
-- Analise de qualidade em nivel de atributo
-- Identificacao de problemas nos dados
-- Proposta de solucoes para os problemas identificados
+- Análise de qualidade em nível de atributo
+- Identificação de problemas nos dados
+- Proposta de soluções para os problemas identificados
 
-### 3. Solucao do Problema de Negocio
+### 3. Solução do Problema de Negócio
 
 Os notebooks `04_gerar_gold_conformidade_racional.ipynb` e `05_analise_solucao_problema.ipynb` implementam:
-- Calculo de conformidade conforme racional estabelecido
-- Resposta a perguntas de negocio
-- Visualizacoes informativas
-- Discussao dos resultados
+- Cálculo de conformidade conforme racional estabelecido
+- Resposta a perguntas de negócio
+- Visualizações informativas
+- Discussão dos resultados
 
-### 4. Evidencias de Execucao
+### 4. Evidências de Execução
 
 Os arquivos HTML em `evidencias-databricks/` servem como:
-- **Prova de execucao**: Demonstram que os notebooks foram executados com sucesso no Databricks
+- **Prova de execução**: Demonstram que os notebooks foram executados com sucesso no Databricks
 - **Rastreabilidade**: Permitem verificar os resultados obtidos em cada etapa
-- **Documentacao executavel**: Mostram nao apenas o codigo, mas tambem os resultados reais da execucao
+- **Documentação executável**: Mostram não apenas o código, mas também os resultados reais da execução
 
-### 5. Documentacao Completa
+### 5. Documentação Completa
 
-A documentacao em Markdown fornece:
+A documentação em Markdown fornece:
 - Contexto do problema e metodologia
-- Detalhes tecnicos do pipeline
-- Catalogo de dados completo
-- Autoavaliacao do trabalho
+- Detalhes técnicos do pipeline
+- Catálogo de dados completo
+- Autoavaliação do trabalho
 
 ## Requisitos da Disciplina Atendidos
 
 Este MVP atende aos seguintes requisitos da disciplina:
 
 1. **Pipeline de Dados na Nuvem (Databricks)**
-   - Implementacao completa em Databricks Community Edition
-   - Uso de PySpark para processamento distribuido
+   - Implementação completa em Databricks Community Edition
+   - Uso de PySpark para processamento distribuído
 
 2. **Arquitetura Data Lake**
    - Camadas Bronze, Silver e Gold bem definidas
-   - Transformacoes documentadas em cada etapa
+   - Transformações documentadas em cada etapa
 
-3. **Analise de Qualidade de Dados**
-   - Analise exploratoria completa
-   - Identificacao e tratamento de problemas
+3. **Análise de Qualidade de Dados**
+   - Análise exploratória completa
+   - Identificação e tratamento de problemas
 
-4. **Solucao de Problema de Negocio**
-   - Implementacao do racional de conformidade
-   - Resposta a perguntas de negocio
-   - Visualizacoes e discussao de resultados
+4. **Solução de Problema de Negócio**
+   - Implementação do racional de conformidade
+   - Resposta a perguntas de negócio
+   - Visualizações e discussão de resultados
 
-5. **Documentacao Completa**
+5. **Documentação Completa**
    - Problema e metodologia documentados
-   - Catalogo de dados detalhado
+   - Catálogo de dados detalhado
    - Pipeline ETL documentado
-   - Autoavaliacao realizada
+   - Autoavaliação realizada
 
 ## Como Utilizar Este Repositorio
 
@@ -120,12 +120,12 @@ Este MVP atende aos seguintes requisitos da disciplina:
 ## Tecnologias Utilizadas
 
 - **Databricks Community Edition**: Plataforma de processamento de dados na nuvem
-- **PySpark**: Processamento distribuido de dados
-- **Python**: Linguagem de programacao principal
-- **Pandas**: Manipulacao de dados
-- **Matplotlib/Seaborn**: Visualizacao de dados
+- **PySpark**: Processamento distribuído de dados
+- **Python**: Linguagem de programação principal
+- **Pandas**: Manipulação de dados
+- **Matplotlib/Seaborn**: Visualização de dados
 - **Parquet**: Formato de armazenamento de dados
-- **Excel**: Geracao de paineis consolidados
+- **Excel**: Geração de painéis consolidados
 
 ## Estrutura de Dados
 
@@ -147,7 +147,7 @@ Painel Consolidado (Excel)
 
 ## Contato e Suporte
 
-Para duvidas ou sugestoes sobre este MVP, consulte a documentacao detalhada nos arquivos `.md` ou verifique as evidencias de execucao nos arquivos HTML.
+Para dúvidas ou sugestões sobre este MVP, consulte a documentação detalhada nos arquivos `.md` ou verifique as evidências de execução nos arquivos HTML.
 
 ---
 
