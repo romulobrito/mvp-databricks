@@ -1,0 +1,47 @@
+# Dados (nao versionar)
+*.parquet
+*.xlsx
+*.csv
+*.png
+*.jpg
+*.jpeg
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Databricks
+.dbc/
+*.dbc
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+
+# Logs
+*.log
+*.out
+
+# Temporarios
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Pastas vazias (opcional - descomente se quiser ignorar)
+# dados_bronze/
+# silver/
+# gold/
+# visualizacoes/
+# Workspace/
