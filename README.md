@@ -42,7 +42,9 @@ A pasta **`evidencias-databricks/`** contém os arquivos HTML exportados da exec
 - **Resultados**: Outputs das execuções, incluindo tabelas, gráficos e mensagens de log
 - **Metadados**: Informações sobre tempo de execução, recursos utilizados e status de cada célula
 
-**Importante**: Os arquivos HTML precisam ser baixados do repositório para serem visualizados corretamente, pois contêm JavaScript e dados embutidos que requerem acesso local ao arquivo.
+**⚠️ IMPORTANTE - Como Visualizar as Evidências**: 
+
+Os arquivos HTML **NÃO podem ser visualizados diretamente no GitHub**. É **necessário baixar** os arquivos HTML da pasta `evidencias-databricks/` para o seu computador local e abri-los em um navegador web (Chrome, Firefox, etc.) para visualizar corretamente. Isso é necessário porque os arquivos contêm JavaScript e dados embutidos que requerem acesso local ao arquivo para funcionar adequadamente.
 
 ## Como os Componentes se Relacionam com o MVP
 
